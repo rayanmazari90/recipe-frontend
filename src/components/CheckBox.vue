@@ -15,7 +15,7 @@
 <template>
   <label class="wrapper flex items-center">
     {{label}}
-    <input class="checkbox" type="checkbox" :checked="isChecked" :value="value" @change="updateInput"/>
+    <input class="checkbox" type="checkbox" :checked="isChecked" :value="value" @change="updateInput" @submit="onSubmitUpdate"/>
     <span class="checkmark"></span>
   </label>
 </template>
@@ -44,6 +44,18 @@ export default {
     }
   },
   methods: {
+    RESTgetRecipes() {
+      const path = `${process.env.VUE_APP_ROOT_URL}/recipes`;
+      axios
+        .get(path)
+        .then((response) => {
+          this.recipes = response.data.recipes;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+
     updateInput(event) {
       let isChecked = event.target.checked
       if (this.modelValue instanceof Array) {
@@ -54,24 +66,36 @@ export default {
           newValue.splice(newValue.indexOf(this.value), 1)
         }
         this.$emit('change', newValue)
+        return isChecked
       } else {
         this.$emit('change', isChecked ? this.trueValue : this.falseValue)
+        return isChecked
       }
-    }
-  },
+    },
+  
   onSubmitUpdate(e) {
       e.preventDefault(); //prevent default form submit form the browser
       this.$refs.editRecipeModal.hide(); //hide the modal when submitted
+
       const payload = {
         name: this.editRecipeForm.name,
         ingredients: this.editRecipeForm.ingredients,
         steps: this.editRecipeForm.steps,
+        rating: this.editRecipeForm.rating,
+        favourites: this.editRecipeForm.favourites,
+        
       };
       this.RESTupdateRecipe(payload, this.editRecipeForm.id);
       this.initForm();
     },
     
   RESTupdateRecipe(payload, recipeId) {
+      if(isChecked()){
+        payload.favourites= "true"
+      }
+      else{
+        payload.favourites= "false"
+      }
       const path = `${process.env.VUE_APP_ROOT_URL}/recipes/${recipeId}`;
       axios
         .put(path, payload)
@@ -91,6 +115,11 @@ export default {
           this.RESTgetRecipess();
         });
     },
+  },
+
+    created() {
+    this.RESTgetRecipes();
+  },
 
 
 }

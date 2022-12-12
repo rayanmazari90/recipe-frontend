@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import RecipeView from '../components/RecipeView.vue'
 import RecipesView from '../views/RecipesView.vue'
+import RecipesViewTEST from '../views/RecipesViewTEST.vue'
 import BOXView from '../components/CheckBox.vue'
 
 Vue.use(VueRouter)
@@ -17,6 +18,12 @@ const routes = [
     path: '/recipe',
     name: 'recipes',
     component: RecipesView
+  },
+  {
+    path: '/recipetest',
+    name: 'recipestest',
+    component: RecipesViewTEST
+
   },
   {
     path: '/recipebox',
