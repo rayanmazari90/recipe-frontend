@@ -19,9 +19,11 @@
               <tr>
                 <th scope="col">Recipe Name</th>
                 <th scope="col">Favorite</th>
-                <th scope="col">ingredients</th>
+                <th scope="col">Ingredients</th>
                 <th scope="col">Steps</th>
                 <th scope="col">Rating</th>
+                <th scope="col"></th>
+                <th scope="col">EDIT/DELETE</th>
               </tr>
             </thead>
             <tbody>
@@ -37,8 +39,8 @@
               </td>
               <td>{{ recipe.ingredients }}</td>
               <td>{{ recipe.steps }}</td>
-              <b-form-rating v-model="recipe.rating"></b-form-rating>
-              <td>{{ recipe.rating}}⭐ </td>
+              <td><b-form-rating v-model="recipe.rating" style="color: rgb(27,135,84);"></b-form-rating></td>
+              <td>{{ recipe.rating}}⭐</td>
                 <td>
                   <div class="btn-group" role="group">
                     <button type="button" 
@@ -124,6 +126,7 @@
                 v-model="createRecipeForm.rating"
                 placeholder="Rating from 1-5"
                 required
+                style="color: rgb(27,135,84);"
             ></b-form-rating>
 
             </b-form-group>
@@ -215,6 +218,7 @@
             v-model="editRecipeForm.rating"
             placeholder="rating (1-5)"
             required
+            style="color: rgb(27,135,84);"
             ></b-form-rating>
         </b-form-group>
         <b-form-group
