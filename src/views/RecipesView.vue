@@ -31,10 +31,10 @@
               <td>{{ recipe.name }}</td>
               <td>
                   <span v-if="recipe.favourites == 1">
-                  <img src="../assets/favorite-favorite-svgrepo-com.svg" alt="avatar">
+                  <img src="../assets/favorite-favorite-svgrepo-com.svg" alt="avatar" style="width: 40px;height: 40px;padding:0%; margin: 0%;">
                   </span>
                   <span v-else>
-                    <img src="../assets/favorite-svgrepo-com.svg" alt="avatar">
+                    <img src="../assets/favorite-svgrepo-com.svg" alt="avatar" style="width: 40px;height: 40px; padding:0%; margin: 0%;">
                   </span>
               </td>
               <td>{{ recipe.ingredients }}</td>
