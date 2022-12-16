@@ -12,7 +12,6 @@ const routes = [
     path: '/',
     name: 'home',
     component: RecipeView
-
   },
   {
     path: '/recipe',
